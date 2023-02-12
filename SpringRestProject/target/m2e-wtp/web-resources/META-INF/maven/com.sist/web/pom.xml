@@ -499,6 +499,11 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+            <!-- xml에서 오류 발생시 추가 -->
+            <plugin>
+			  <artifactId>maven-war-plugin</artifactId>
+			  <version>3.2.2</version>
+			</plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
