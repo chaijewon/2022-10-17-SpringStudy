@@ -36,7 +36,7 @@ public class XMLParse extends DefaultHandler{
 				System.out.println(s);
 				Class clsName=Class.forName(cls);
 				Object obj=clsName.getDeclaredConstructor().newInstance();
-				
+				System.out.println(attributes.getLength());
 				Method[] methods=clsName.getDeclaredMethods();
 				for(Method m:methods)
 				{
