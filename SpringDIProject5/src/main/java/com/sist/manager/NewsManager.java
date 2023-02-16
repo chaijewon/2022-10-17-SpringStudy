@@ -1,6 +1,9 @@
 package com.sist.manager;
 
 import org.springframework.stereotype.Component;
+
+import com.sist.vo.NewsVO;
+
 import java.util.*;
 
 import org.json.simple.JSONArray;
@@ -10,17 +13,40 @@ import org.json.simple.parser.JSONParser;
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
+@Component
 public class NewsManager {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		NewsManager n=new NewsManager();
-		newsData("영화");
-	}
-	public static String newsData(String ss)
+		newsData("맛집");
+	}*/
+    public List<NewsVO> newsListData(String ss)
+    {
+    	List<NewsVO> list=new ArrayList<NewsVO>();
+    	try
+    	{
+    		String json=newsData(ss);
+    		JSONParser jp=new JSONParser();// [ {
+    		JSONObject data=(JSONObject)jp.parse(json);
+    		JSONArray arr=(JSONArray)data.get("items");
+    		for(int i=0;i<arr.size();i++)
+    		{
+    			JSONObject obj=(JSONObject)arr.get(i);
+    			NewsVO vo=new NewsVO();
+    			vo.setTitle((String)obj.get("title"));
+    			vo.setDescription((String)obj.get("description"));
+    			vo.setPubDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date((String)obj.get("pubDate"))));
+    			vo.setLink((String)obj.get("link"));
+    			list.add(vo);
+    		}
+    	}catch(Exception ex){}
+    	return list;
+    }
+	public String newsData(String ss)
 	{
 		
-		String clientId = ""; //애플리케이션 클라이언트 아이디값"
-        String clientSecret = ""; //애플리케이션 클라이언트 시크릿값"
+		String clientId = "xzCkjdHVMmHBQA5GsaNk"; //애플리케이션 클라이언트 아이디값"
+        String clientSecret = "xpoZsdLvAt"; //애플리케이션 클라이언트 시크릿값"
 
 
         String text = null;
@@ -31,7 +57,7 @@ public class NewsManager {
         }
 
 
-        String apiURL = "https://openapi.naver.com/v1/search/news.json?query=" + text;    // json 결과
+        String apiURL = "https://openapi.naver.com/v1/search/news.json?display=100&query=" + text;    // json 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
 
