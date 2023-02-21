@@ -64,7 +64,7 @@ public class BoardController {
 	   return "redirect:list.do";
    }
    // <a href="detail.do?no=${vo.no }">${vo.subject }</a>
-   @RequestMapping("detail.do")
+   @RequestMapping("detail.do")// aaa => 400
    public String board_detail(int no,Model model)
    {
 	   BoardVO vo=dao.boardDetailData(no);
@@ -91,6 +91,14 @@ public class BoardController {
    }
    @RequestMapping("find.do")
    // find.do?ss= &fs=
+   /*
+    *  String , int , List , VO ,String[]
+    *  name="file[0]"
+    *  name="file[1]"
+    *  name="file[2]" ==> list
+    *  
+    *  리턴형 : String , void 
+    */
    public String board_find(String fs,String ss,Model model)
    {
 	   Map map=new HashMap();
