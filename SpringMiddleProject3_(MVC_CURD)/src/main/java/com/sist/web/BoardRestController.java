@@ -41,4 +41,24 @@ public class BoardRestController {
 	   }
 	   return result;
    }
+   @RequestMapping(value="board/delete_ok.do",produces = "text/html;charset=UTF-8")
+   public String board_delete(int no,String pwd)
+   {
+	   String result="";
+	   boolean bCheck=dao.boardDelete(no, pwd);
+	   if(bCheck==true)
+	   {
+		   result="<script>"
+				 +"location.href=\"list.do\""
+				 +"</script>";
+	   }
+	   else
+	   {
+		   result="<script>"
+				 +"alert(\"비밀번호가 틀립니다!!\");"
+				 +"history.back();"
+				 +"</script>";
+	   }
+	   return result;
+   }
 }

@@ -23,6 +23,7 @@ h1{
   <div class="container">
     <h1>삭제하기</h1>
     <div class="row">
+      <form method="post" action="delete_ok.do">
       <table class="table">
         <tr>
           <td>
@@ -39,6 +40,7 @@ h1{
           </td>
         </tr>
       </table>
+      </form>
     </div>
   </div>
 </body>

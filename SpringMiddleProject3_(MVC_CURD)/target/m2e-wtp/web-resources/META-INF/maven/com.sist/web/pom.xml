@@ -21,6 +21,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
+	    <dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+	    
 	    <!-- ojdbc(Maven에서 사용이 안된다)-->
 	    <!-- 시스템 경로 줄때 사용  -->
 	    <!-- <dependency>
@@ -35,6 +41,7 @@
 		    <artifactId>ojdbc8</artifactId>
 		    <version>18.15.0.0</version>
 		</dependency>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

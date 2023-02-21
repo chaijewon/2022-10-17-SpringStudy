@@ -16,6 +16,13 @@ import com.sist.dao.*;
 // 화면 전환 = 리턴형이 (jsp,do)
 @Controller
 @RequestMapping("board/")
+/*
+ *   사용자 요청 ==> .do ==> 요청 처리 ==> @RequestMapping()
+ *   
+ *   어노테이션은 밑에 / 옆에 있다 
+ *   
+ *   
+ */
 public class BoardController {
    @Autowired
    private BoardDAO dao;
@@ -82,6 +89,21 @@ public class BoardController {
 	   model.addAttribute("no", no);
 	   return "board/delete";
    }
+   @RequestMapping("find.do")
+   // find.do?ss= &fs=
+   public String board_find(String fs,String ss,Model model)
+   {
+	   Map map=new HashMap();
+	   map.put("fs", fs);
+	   map.put("ss", ss);
+	   List<BoardVO> list=dao.boardFindData(map);
+	   int count=dao.boardFindCount(map);
+	   // 데이터를 JSP전송 
+	   model.addAttribute("list", list);
+	   model.addAttribute("count", count);
+	   return "board/find";
+   }
+   
 }
 
 

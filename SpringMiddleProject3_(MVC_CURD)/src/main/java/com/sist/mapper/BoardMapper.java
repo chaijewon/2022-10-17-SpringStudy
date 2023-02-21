@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -53,7 +54,25 @@ public interface BoardMapper {
 		 +"WHERE no=#{no}")
   public void boardUpdate(BoardVO vo);
   // 데이터 삭제
+  @Delete("DELETE FROM spring_board WHERE no=#{no}")
+  public void boardDelete(int no);
   // 데이터 검색 
+  @Select("SELECT COUNT(*) FROM spring_board "
+		 +"WHERE ${fs} LIKE '%'||#{ss}||'%'")
+  public int boardFindCount(Map map);
+  // name  '홍'
+  /*
+   *    WHERE name LIKE '%홍%'
+   *         -----       ----
+   *         ${fs}        #{} => 실제 데이터값
+   *         -----
+   *         column /table
+   *         name=''
+   *         ---- --
+   */
+  @Select("SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit FROM spring_board "
+			 +"WHERE ${fs} LIKE '%'||#{ss}||'%'")
+  public List<BoardVO> boardFindData(Map map);
 }
 
 

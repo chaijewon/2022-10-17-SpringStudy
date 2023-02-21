@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -58,7 +59,7 @@ public class BoardDAO {
 	  }
 	  
 	  /*
-	   *   @Select("SELECT pwd FROM spring_board WHERE no=#{no}")
+	   *  @Select("SELECT pwd FROM spring_board WHERE no=#{no}")
 		  public String boardGetPassword(int no);
 		  // 데이터 수정
 		  @Update("UPDATE spring_board SET "
@@ -76,6 +77,44 @@ public class BoardDAO {
 			  mapper.boardUpdate(vo);
 		  }
 		  return bCheck;
+	  }
+	  
+	  /*
+	   *    @Select("SELECT pwd FROM spring_board WHERE no=#{no}")
+            public String boardGetPassword(int no);
+            
+            @Delete("DELETE FROM spring_board WHERE no=#{no}")
+	   */
+	  public boolean boardDelete(int no,String pwd)
+	  {
+		  boolean bCheck=false;
+		  //비밀번호 읽기
+		  String db_pwd=mapper.boardGetPassword(no);
+		  if(db_pwd.equals(pwd))
+		  {
+			  bCheck=true;
+			  mapper.boardDelete(no);
+		  }
+		  return bCheck;
+	  }
+	  
+	  /*
+	   *   @Select("SELECT COUNT(*) FROM spring_board "
+		 +"WHERE ${fs} LIKE '%'||#{ss}||'%'")
+		  public int boardFindCount(Map map);
+      */
+	  public int boardFindCount(Map map)
+	  {
+		  return mapper.boardFindCount(map);
+	  }
+	  /*  
+		  @Select("SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit FROM spring_board "
+					 +"WHERE ${fs} LIKE '%'||#{ss}||'%'")
+		  public List<BoardVO> boardFindData(Map map);
+	   */
+	  public List<BoardVO> boardFindData(Map map)
+	  {
+		  return mapper.boardFindData(map);
 	  }
    
 }

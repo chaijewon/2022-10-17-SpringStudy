@@ -21,17 +21,25 @@ h1{
 </style>
 </head>
 <body>
-   <div class="container">
-     <h1>게시판</h1>
-     <div class="row">
-      <table class="table">
-        <tr>
-         <td>
-          <a href="insert.do" class="btn btn-sm btn-success">새글</a>
-         </td>
-        </tr>
-      </table>
-      <table class="table table-striped">
+  <div class="container">
+    <h1>검색 결과</h1>
+    <div class="row">
+       <table class="table">
+         <tr>
+           <td class="text-right">
+            <a href="list.do" class="btn btn-sm btn-danger">목록</a>
+           </td>
+         </tr>
+       </table> 
+      <c:if test="${count==0 }">
+       <table class="table">
+         <tr>
+          <td class="textx-center">검색 결과가 없습니다</td>
+         </tr>
+       </table>
+      </c:if>
+      <c:if test="${count>0 }">
+       <table class="table table-striped">
         <tr class="success">
           <th width=10% class="text-center">번호</th>
           <th width=45% class="text-center">제목</th>
@@ -48,36 +56,9 @@ h1{
 	          <td width=10% class="text-center">${vo.hit }</td>
           </tr>
         </c:forEach>
-        <tr>
-          <td colspan="2">
-          <form method=post action="find.do">
-	           Search:
-	           <select name="fs" class="input-sm">
-	              <option value="name">이름</option>
-	              <option value="subject">제목</option>
-	              <option value="content">내용</option>
-	           </select>
-	           <input type=text name=ss class="input-sm" size=15>
-	           <input type=submit value="검색" class="btn btn-sm btn-danger">
-           </form>
-          </td>
-          <td colspan="3" class="text-right">
-            <a href="#" class="btn btn-sm btn-info">이전</a>
-            ${curpage } page / ${totalpage } pages
-            <a href="#" class="btn btn-sm btn-warning">다음</a>
-          </td>
-        </tr>
-      </table>
-     </div>
-   </div>
+        </table>
+      </c:if>
+    </div>
+  </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
