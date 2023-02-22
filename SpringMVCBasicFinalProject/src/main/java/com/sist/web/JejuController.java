@@ -59,7 +59,29 @@ public class JejuController {
    @GetMapping("jeju/detail.do")
    public String jeju_detail(int no,Model model)
    {
-	   
+	   JejuLocationVO vo=dao.jejuDetailData(no);
+	   String poster=vo.getInfo();
+	   int i=poster.indexOf("^");
+	   System.out.println("i="+i);
+	   if(i>=0)
+	   {
+		   poster=poster.substring(0,poster.indexOf("^"));
+		   System.out.println("poster="+poster);
+		   
+	   }
+	   vo.setInfo(poster);
+	   String addr=vo.getAddr();
+	   String[] addrs=addr.split(" ");
+	   Map map=new HashMap();
+	   map.put("addr", addrs[1].trim());
+	   List<JejuFoodVO> list=dao.jejuFoodData(map);
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("list", list);
 	   return "jeju/detail";
    }
 }
+
+
+
+
+

@@ -3,6 +3,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.sist.vo.JejuFoodVO;
 import com.sist.vo.JejuLocationVO;
 public interface JejuMapper {
   // 목록 (여행지)
@@ -15,4 +16,12 @@ public interface JejuMapper {
   
   @Select("SELECT CEIL(COUNT(*)/20.0) FROM jejuLocation")
   public int jejuTotalPage();
+  
+  @Select("SELECT * FROM jejuLocation WHERE no=#{no}")
+  public JejuLocationVO jejuDetailData(int no);
+  
+  @Select("SELECT no,title,poster,score,rownum "
+		 +"FROM jejuFood "
+		 +"WHERE rownum<=4 AND addr2 LIKE '%'||#{addr}||'%'")
+  public List<JejuFoodVO> jejuFoodData(Map map);
 }

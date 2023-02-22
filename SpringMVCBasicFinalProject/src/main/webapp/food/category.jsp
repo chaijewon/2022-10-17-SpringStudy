@@ -27,6 +27,7 @@ h1{
       <a href="../food/category.do?no=1" class="btn btn-lg btn-danger">믿고보는 맛집 리스트</a>
       <a href="../food/category.do?no=2" class="btn btn-lg btn-success">지역별 인기 맛집</a>
       <a href="../food/category.do?no=3" class="btn btn-lg btn-primary">메뉴별 인기 맛집</a>
+      <a href="../food/find.do" class="btn btn-lg btn-info">맛집 검색</a>
      </div>
     </div>
     <div style="height: 20px"></div>

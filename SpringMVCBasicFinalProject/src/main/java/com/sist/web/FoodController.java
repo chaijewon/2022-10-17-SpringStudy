@@ -1,9 +1,15 @@
 package com.sist.web;
+// => DI / MVC => AOP 
+// => Intercepter => 자동 로그인 / ID저장  ==> naver,facebook  ==> security
+// => task => betch 
+// => spring data....
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 import com.sist.dao.*;
@@ -57,5 +63,62 @@ public class FoodController {
 		model.addAttribute("vo", vo);
 		return "food/detail";
 	}
+	
+	
+	/*@GetMapping("food/find.do")//GET/POST
+	public String food_find(String addr,String page,Model model)
+	{
+		System.out.println("addr="+addr);
+		String s="";
+		if(addr==null || addr.equals(""))
+		{
+			s="all";
+		}
+		else
+		{
+			s=addr;
+		}
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=20;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("ss", s);
+		List<FoodVO> list=dao.foodFindData(map);
+		model.addAttribute("list", list);
+		return "food/find";
+	}*/
+	@RequestMapping("food/find.do")//GET/POST
+	public String food_find2(String addr,String page,Model model)
+	{
+		System.out.println("addr="+addr);
+		String s="";
+		if(addr==null || addr.equals(""))
+		{
+			s="all";
+		}
+		else
+		{
+			s=addr;
+		}
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=20;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("ss", s);
+		List<FoodVO> list=dao.foodFindData(map);
+		model.addAttribute("list", list);
+		return "food/find";
+	}
+	
 	
 }

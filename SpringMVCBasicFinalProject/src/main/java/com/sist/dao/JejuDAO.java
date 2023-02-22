@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.*;
+import com.sist.vo.JejuFoodVO;
 import com.sist.vo.JejuLocationVO;
 @Repository
 public class JejuDAO {
@@ -27,4 +28,19 @@ public class JejuDAO {
 	{
 		return mapper.jejuTotalPage();
 	}
+	
+	/*@Select("SELECT * FROM jejuLocation WHERE no=#{no}")
+	  public JejuLocationVO jejuDetailData(int no);*/
+	public JejuLocationVO jejuDetailData(int no)
+	{
+		return mapper.jejuDetailData(no);
+	}
+	  
+	 /*@Select("SELECT no,title,poster,score,rownum "
+			 +"FROM jejuFood "
+			 +"WHERE rownum<=4 AND addr LIKE '%'||#{addr}||'%'")*/
+	  public List<JejuFoodVO> jejuFoodData(Map map)
+	  {
+		  return mapper.jejuFoodData(map);
+	  }
 }

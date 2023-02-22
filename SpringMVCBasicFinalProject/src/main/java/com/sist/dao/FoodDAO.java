@@ -40,4 +40,22 @@ public class FoodDAO {
   {
 	  return mapper.foodDetailData(fno);
   }
+  
+  /*@Select({
+	  "<script>"
+	  +"SELECT fno,name,poster,num "
+	  +"FROM (SELECT fno,name,poster,rownum as num "
+	  +"FROM (SELECT fno,name,poster "
+	  +"FROM food_location "
+	  +"<if test=\"ss!='all'\">"
+	  +"WHERE address LIKE '%'||#{ss}||'%'"
+	  +"</if>"
+	  +"ORDER BY fno ASC)) "
+	  +"WHERE num BETWEEN #{start} AND #{end}"
+	  +"</script>"
+  })*/
+  public List<FoodVO> foodFindData(Map map)
+  {
+	  return mapper.foodFindData(map);
+  }
 }

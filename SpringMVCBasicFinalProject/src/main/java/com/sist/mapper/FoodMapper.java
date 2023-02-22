@@ -36,4 +36,30 @@ public interface FoodMapper {
   @Select("SELECT * FROM project_food "
 		 +"WHERE fno=#{fno}")
   public FoodVO foodDetailData(int fno);
+  
+  // 검색 : 동적 쿼리 (<if> , <choose> , <foreach>:IN , <trim> , <where> , <set>) => 다중 조건문 
+  // MyBatis => 핵심 , JOIN , SubQuery , Procedure , Function , Trigger
+  @Select({
+	  "<script>"
+	  +"SELECT fno,name,poster,num "
+	  +"FROM (SELECT fno,name,poster,rownum as num "
+	  +"FROM (SELECT fno,name,poster "
+	  +"FROM food_location "
+	  +"<if test=\"ss!='all'\">"
+	  +"WHERE address LIKE '%'||#{ss}||'%'"
+	  +"</if>"
+	  +"ORDER BY fno ASC)) "
+	  +"WHERE num BETWEEN #{start} AND #{end}"
+	  +"</script>"
+  })
+  public List<FoodVO> foodFindData(Map map);
 }
+
+
+
+
+
+
+
+
+
