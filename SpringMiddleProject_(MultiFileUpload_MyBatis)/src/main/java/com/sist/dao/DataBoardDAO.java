@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,5 +41,19 @@ public class DataBoardDAO {
 	   public void databoardInsert(DataBoardVO vo)
 	   {
 		   mapper.databoardInsert(vo);
+	   }
+	   
+	  //3. 상세보기 
+	   /*@Update("UPDATE spring_databoard SET "
+			  +"hit=hit+1 "
+			  +"WHERE no=#{no}")*/
+	   /*@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,"
+			  +"filename,filesize,filecount "
+			  +"FROM spring_databoard "
+			  +"WHERE no=#{no}")*/
+	   public DataBoardVO databoardDetailData(int no)
+	   {
+		   mapper.hitIncrement(no);
+		   return mapper.databoardDetailData(no);
 	   }
 }

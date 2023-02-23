@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
 import java.util.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.RowSet;
 
 import com.sist.dao.*;
@@ -82,8 +87,49 @@ public class DataBoardController {
    @GetMapping("databoard/detail.do")
    public String databoard_detail(int no, Model model)
    {
-	   
+	   DataBoardVO vo=dao.databoardDetailData(no);
+	   if(vo.getFilecount()>0)
+	   {
+	     String[] fn=vo.getFilename().split(",");
+	     String[] fs=vo.getFilesize().split(",");
+	     List<String> nList=Arrays.asList(fn);
+	     List<String> sList=Arrays.asList(fs);
+	     
+	     model.addAttribute("nList", nList);
+	     model.addAttribute("sList", sList);
+	     /*
+	      *   파일명(파일크기)
+	      */
+	   }
+       model.addAttribute("vo", vo);	   
 	   return "databoard/detail";
+   }
+   // download.do?fn=${fn }
+   // @Controller ==> 리턴형 (String(화면 이동),void(자체 처리))
+   @GetMapping("databoard/download.do")
+   public void databoard_download(String fn,HttpServletResponse response)
+   {
+	   try
+	   {
+		   File file=new File("c:\\download\\"+fn);
+		   
+		   response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fn, "UTF-8"));
+		   // 다운로드 팝업창 띄우기 
+		   response.setContentLength((int)file.length());
+		   
+		   // 실제 다운로드 
+		   BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));// 서버에 존재하는 파일 위치 
+		   BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());// 사용자 다운받는 위치 
+		   int i=0;
+		   byte[] buffer=new byte[1024];
+		   
+		   while((i=bis.read(buffer, 0, 1024))!=-1)
+		   {
+			   bos.write(buffer, 0, i);
+		   }
+           bis.close();
+           bos.close();
+	   }catch(Exception ex) {}
    }
 }
 
