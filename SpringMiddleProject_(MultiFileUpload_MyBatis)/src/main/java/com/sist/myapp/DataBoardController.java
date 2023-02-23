@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -130,6 +131,23 @@ public class DataBoardController {
            bis.close();
            bos.close();
 	   }catch(Exception ex) {}
+   }
+   // update.do?no=${vo.no }
+   @GetMapping("databoard/update.do")
+   public String databoard_update(int no,Model model)
+   {
+	   DataBoardVO vo=dao.databoardUpdateData(no);
+	   model.addAttribute("vo", vo);
+	   return "databoard/update";
+   }
+   // 실제 수정 
+   @PostMapping("databoard/update_ok.do")
+   public String databoard_update_ok(DataBoardVO vo,RedirectAttributes ra)
+   {
+	   dao.databoardUpdate(vo);
+	   ra.addAttribute("no", vo.getNo());//?no=
+	   return "redirect:detail.do";
+			   
    }
 }
 

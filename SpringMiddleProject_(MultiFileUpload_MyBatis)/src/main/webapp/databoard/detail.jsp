@@ -19,6 +19,56 @@ h1{
    text-align: center;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){ // window.onload => main
+	$('#delSpan').click(function(){
+		if(i==0)
+		{
+			$('#del').show();
+			$('#delSpan').text("취소")
+			i=1;
+		}
+		else
+		{
+			$('#del').hide();
+			$('#delSpan').text("삭제")
+			i=0;
+		}
+	})
+	$('#delBtn').on("click",function(){
+		let pwd=$('#pwd').val();
+		let no=$('#no').text();
+		// let pwd=document.querySelector("#pwd") 
+		if(pwd.trim()=="")
+		{
+			$('#pwd').focus();
+			return;
+		}
+		
+		$.ajax({
+			type:'post',
+			url:'delete.do',
+			data:{"no":no,"pwd":pwd},
+			success:function(response)
+			{
+				let res=response.trim();
+				if(res=='yes')
+				{
+					location.href="list.do"
+				}
+				else
+				{
+					alert("비밀번호가 틀립니다!!\n다시입력하세요")
+					$('#pwd').val("")
+					$('#pwd').focus()
+				}
+			}
+		})
+	})
+})
+</script>
 </head>
 <body>
   <div class="container">
@@ -27,7 +77,7 @@ h1{
       <table class="table">
         <tr>
          <th width=20% class="text-center success">번호</th>
-         <td width=30% class="text-center">${vo.no }</td>
+         <td width=30% class="text-center" id="no">${vo.no }</td>
          <th width=20% class="text-center success">작성일</th>
          <td width=30% class="text-center">${vo.dbday }</td>
         </tr>
@@ -58,9 +108,15 @@ h1{
         </tr>
         <tr>
           <td colspan="4" class="text-right">
-            <a href="#" class="btn btn-xs btn-info">수정</a>
-            <a href="#" class="btn btn-xs btn-success">삭제</a>
+            <a href="update.do?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
+            <span class="btn btn-xs btn-success" id="delSpan">삭제</span>
             <a href="list.do" class="btn btn-xs btn-warning">목록</a>
+          </td>
+        </tr>
+        <tr id="del" style="display:none">
+          <td colspan="4" class="text-right">
+           비밀번호:<input type=password name=pwd size=10 class="input-sm" id="pwd">
+           <input type=button class="btn btn-sm btn-danger" value="삭제" id="delBtn">
           </td>
         </tr>
       </table>

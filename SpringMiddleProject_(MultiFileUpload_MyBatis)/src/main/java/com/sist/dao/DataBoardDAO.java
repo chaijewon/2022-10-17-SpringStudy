@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
@@ -56,4 +57,59 @@ public class DataBoardDAO {
 		   mapper.hitIncrement(no);
 		   return mapper.databoardDetailData(no);
 	   }
+	   
+	   //4. 삭제
+	   //@Select("SELECT pwd FROM spring_databoard WHERE no=#{no}")
+	   //public String databoardGetPassword(int no);
+	   
+	   //@Select("SELECT filename,filesize,filecount FROM spring_databoard WHERE no=#{no}")
+	   public DataBoardVO databoardFileInfoData(int no)
+	   {
+		   return mapper.databoardFileInfoData(no);
+	   }
+	   
+	   //@Delete("DELETE FROM spring_databoard WHERE no=#{no}")
+	   public boolean databoardDelete(int no,String pwd)
+	   {
+		   boolean bCheck=false;
+		   String db_pwd=mapper.databoardGetPassword(no);
+		   if(db_pwd.equals(pwd))
+		   {
+			  bCheck=true;
+			  mapper.databoardDelete(no);
+		   }
+		   return bCheck;
+	   }
+	   
+	   // 수정 데이터 
+	   public DataBoardVO databoardUpdateData(int no)
+	   {
+		   return mapper.databoardDetailData(no);
+	   }
+	   
+	   public boolean pwdCheck(int no,String pwd)
+	   {
+		   boolean bCheck=false;
+		   String db_pwd=mapper.databoardGetPassword(no);
+		   if(db_pwd.equals(pwd))
+			   bCheck=true;
+		   return bCheck;
+	   }
+	   
+	   /*
+	    *  @Update("UPDATE spring_databoard SET "
+		  +"name=#{name},subject=#{subject},content=#{content} "
+		  +"WHETE no=#{no}")
+   public void databoardUpdate(DataBoardVO vo);
+	    */
+	   public void databoardUpdate(DataBoardVO vo)
+	   {
+		   mapper.databoardUpdate(vo);
+	   }
 }
+
+
+
+
+
+
