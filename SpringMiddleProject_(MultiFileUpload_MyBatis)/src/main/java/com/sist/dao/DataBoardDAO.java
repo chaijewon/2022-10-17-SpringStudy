@@ -106,6 +106,16 @@ public class DataBoardDAO {
 	   {
 		   mapper.databoardUpdate(vo);
 	   }
+	   
+	   public int FindCount(Map map)
+	   {
+		   return mapper.FindCount(map);
+	   }
+	   
+	   public List<DataBoardVO> databoardFindData(Map map)
+	   {
+		   return mapper.databoardFindData(map);
+	   }
 }
 
 

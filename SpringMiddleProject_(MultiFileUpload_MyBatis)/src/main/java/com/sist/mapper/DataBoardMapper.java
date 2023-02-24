@@ -64,6 +64,34 @@ public interface DataBoardMapper {
 		  +"name=#{name},subject=#{subject},content=#{content} "
 		  +"WHERE no=#{no}")
    public void databoardUpdate(DataBoardVO vo);
+   
+   //<select id="databoardFindData" resultType="DataBoardVO" parameterType="hashmap">
+   public List<DataBoardVO> databoardFindData(Map map);
+   
+   @Select({
+	      "<script>"
+		  +"SELECT COUNT(*) FROM spring_databoard "
+		  +"WHERE "
+		  +"<trim prefixOverrides=\"OR\">"
+		  +"<foreach collection=\"fsArr\" item=\"fd\">"
+          +"<trim prefix=\"OR\">"
+          +"<choose>"
+          +"<when test=\"fd=='N'.toString()\">"
+          +"name LIKE '%'||#{ss}||'%'"
+          +"</when>"
+          +"<when test=\"fd=='S'.toString()\">"
+          +"subject LIKE '%'||#{ss}||'%'"
+          +"</when>"
+          +"<when test=\"fd=='C'.toString()\">"
+          +"content LIKE '%'||#{ss}||'%'"
+          +"</when>"
+          +"</choose>"
+          +"</trim>"
+          +"</foreach>"
+          +"</trim>"
+          +"</script>"})
+   public int FindCount(Map map);
+          
 }
 
 

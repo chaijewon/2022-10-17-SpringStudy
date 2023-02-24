@@ -22,14 +22,24 @@ h1{
 </head>
 <body>
   <div class="container">
-    <h1>자료실</h1>
+    <h1>검색결과</h1>
     <div class="row">
+     <c:if test="${count<1 }">
       <table class="table">
         <tr>
-         <td>
-           <a href="insert.do" class="btn btn-sm btn-primary">새글</a>
+         <td class="text-center">
+           <h3>검색된 결과가 없습니다</h3>
          </td>
         </tr>
+      </table>
+      </c:if>
+      <c:if test="${count>0 }">
+      <table class="table">
+       <tr>
+        <td class="text-right">
+         총 ${count }건 검색
+        </td>
+       </tr>
       </table>
       <table class="table table-hover">
         <tr class="danger">
@@ -55,33 +65,9 @@ h1{
 	        </tr>
         </c:forEach>
       </table>
-      <table class="table">
-        <tr>
-          <td class="text-left">
-           <form method="post" action="find.do">
-            <input type="checkbox" name="fs" value="N">이름
-            <input type="checkbox" name="fs" value="S">제목
-            <input type="checkbox" name="fs" value="C">내용
-            <input type=text name=ss size=15 class="input-sm">
-            <input type=submit value="검색" class="btn btn-sm btn-danger">
-           </form>
-          </td>
-          <td class="text-right">
-            <a href="#" class="btn btn-sm btn-info">이전</a>
-            ${curpage } page / ${totalpage } pages 
-            <a href="#" class="btn btn-sm btn-info">다음</a> 
-          </td>
-        </tr>
-      </table>
+      </c:if>
     </div>
   </div>
 </body>
 </html>
-
-
-
-
-
-
-
 
