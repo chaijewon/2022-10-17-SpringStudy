@@ -12,5 +12,11 @@ public interface FoodMapper {
 		 +"WHERE num BETWEEN #{start} AND #{end}")
   public List<FoodVO> foodListData(Map map);
   
+  @Select("SELECT CEIL(COUNT(*)/20.0) FROM food_location")
+  public int foodTotalPage();
   
+  // <select id="foodFindData" resultType="FoodVO" parameterType="hashmap">
+  public List<FoodVO> foodFindData(Map map);
+  // <select id="foodFindCount" resultType="int" parameterType="hashmap">
+  public int foodFindCount(Map map);// Map map=new HashMap()
 }
