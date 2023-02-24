@@ -51,6 +51,29 @@ public class FoodController {
 	  model.addAttribute("list", list);
 	  return "food/list";
   }
+  /*
+   *   <![CDATA[
+    SELECT fno,name,poster,type,address,rownum
+    FROM food_location
+    WHERE rownum<=40 AND
+    <trim prefixOverrides="OR" prefix="(" suffix=")">
+      <foreach collection="typeArr" item="fd">
+        <trim prefix="OR">
+          <choose>
+           <when test="fd=='N'.toString()">
+            name LIKE '%'||#{ss}||'%'
+           </when>
+           <when test="fd=='A'.toString()">
+            address LIKE '%'||#{ss}||'%'
+           </when>
+           <when test="fd=='T'.toString()">
+            type LIKE '%'||#{ss}||'%'
+           </when>
+          </choose>
+        </trim>
+      </foreach>
+    </trim> ]]>
+   */
   @PostMapping("food/find.do")
   public String food_find(String[] types,String ss,Model model)
   {
