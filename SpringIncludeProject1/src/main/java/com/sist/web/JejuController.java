@@ -25,7 +25,7 @@ public class JejuController {
 		List<JejuLocationVO> sList=dao.jejuLocationListData(map);
 		int totalpage=dao.jejuTotalPage();
 		
-		final int BLOCK=10;
+		final int BLOCK=5;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		

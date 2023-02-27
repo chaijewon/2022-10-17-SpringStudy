@@ -14,13 +14,14 @@
 	      <a href="../jeju/detail.do?no=${vo.no }">
 	        <img src="${vo.poster }" style="width:300px;height: 220px">
 	        <div class="caption">
-	          <p style="font-size: 8px">${vo.title }</p>
+	          <p style="font-size: 7px">${vo.title }</p>
 	        </div>
 	      </a>
 	    </div>
 	  </div>
   </c:forEach>
   <div style="height: 10px"></div>
+  <div class="row">
   <div class="text-center">
     <ul class="pagination">
       <c:if test="${startPage>1 }">
@@ -33,6 +34,7 @@
 	  <li><a href="../jeju/location.do?page=${endPage+1 }">&gt;</a></li>
 	  </c:if>
 	</ul>
+  </div>
   </div>
 </body>
 </html>
