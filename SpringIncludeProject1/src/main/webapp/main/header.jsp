@@ -14,6 +14,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="../main/main.do">Home</a></li>
+      <li><a href="../member/join.do">회원가입</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">서울여행
         <span class="caret"></span></a>
@@ -27,8 +28,8 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">제주여행
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">명소</a></li>
-          <li><a href="#">맛집</a></li>
+          <li><a href="../jeju/location.do">명소</a></li>
+          <li><a href="../jeju/food.do">맛집</a></li>
         </ul>
       </li>
       <li class="dropdown">
