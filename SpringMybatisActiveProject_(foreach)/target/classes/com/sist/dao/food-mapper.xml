@@ -10,13 +10,13 @@
         <trim prefix="OR">
           <choose>
            <when test="fd=='N'.toString()">
-            name LIKE '%'||#{ss}||'%'
+           name LIKE '%'||#{ss}||'%'
            </when>
            <when test="fd=='A'.toString()">
-            address LIKE '%'||#{ss}||'%'
+           address LIKE '%'||#{ss}||'%'
            </when>
            <when test="fd=='T'.toString()">
-            type LIKE '%'||#{ss}||'%'
+           type LIKE '%'||#{ss}||'%'
            </when>
           </choose>
         </trim>
