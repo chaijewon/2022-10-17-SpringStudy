@@ -1,4 +1,4 @@
-package com.sist.mapper;
+package com.sist.interceptor;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Options;
@@ -25,7 +25,7 @@ public interface ReplyMapper {
 		/
    */
 
-	@Select(value="{CALL replyList(#{pRno,mode=IN,javaType=java.lang.Integer},#{pType,mode=IN,javaType=java.lang.Integer},#{pResult,mode=OUT,jdbcType=CURSOR,resultMap=replyMap})}")
+	@Select(value="{CALL replyList(#{pRno,mode=IN,javaType=java.lang.Integer},#{pType,mode=IN,javaType=java.lang.Integer},#{pResult,mode=OUT,jdbcType=CURSOR})}")
     @Options(statementType=StatementType.CALLABLE)
 	public List<ReplyVO> replyListData(Map map);
 	

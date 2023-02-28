@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.*;
+import com.sist.interceptor.ReplyMapper;
 import com.sist.mapper.*;
-@Repository
+//@Repository
 public class ReplyOrmDAO {
-   @Autowired
+   //@Autowired
    private ReplyMapper mapper;
    // replyListData(int rno,int type)
    //@Select(value="{CALL replyList(#{pRno,mode=IN,jdbcType=INTEGER},#{pType,mode=IN,jdbcType=INTEGER},
