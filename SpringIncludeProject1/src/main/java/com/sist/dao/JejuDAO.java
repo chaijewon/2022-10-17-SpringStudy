@@ -42,4 +42,11 @@ public class JejuDAO {
 	{
 		return mapper.jejuFoodTotalPage();
 	}
+	
+	/*@Select("SELECT * FROM jejuFood "
+			+"WHERE no=#{no}")*/
+	 public JejuFoodVO jejuDetailData(int no)
+	 {
+		 return mapper.jejuDetailData(no);
+	 }
 }

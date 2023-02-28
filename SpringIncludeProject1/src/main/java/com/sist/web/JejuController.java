@@ -13,6 +13,9 @@ public class JejuController {
    @Autowired
    private JejuDAO dao;
    
+   @Autowired
+   private ReplyDAO rdao;
+   
    @GetMapping("jeju/location.do")
    public String jeju_location(String page,Model model)
    {
@@ -65,6 +68,19 @@ public class JejuController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("sList", sList);
 		model.addAttribute("main_jsp", "../jeju/food.jsp");
+	   return "main/main";
+   }
+   // food_detail.do?no=${vo.no }&type=2
+   @GetMapping("jeju/food_detail.do")
+   public String jeju_food_detail(int fno,int type,Model model)
+   {
+	   JejuFoodVO vo=dao.jejuDetailData(fno);
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("main_jsp", "../jeju/food_detail.jsp");
+	   
+	   // 댓글 
+	   List<ReplyVO> rList=rdao.replyListData(fno, type);
+	   model.addAttribute("rList", rList);
 	   return "main/main";
    }
 }
