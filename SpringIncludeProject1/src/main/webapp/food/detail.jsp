@@ -115,6 +115,38 @@ h1{
            </td>
          </tr>
         </table>
+        <div style="height: 20px"></div>
+        <table class="table">
+          <tr>
+           <td>
+            <c:forEach var="rvo" items="${rList }">
+              <table class="table">
+                <tr>
+                 <td class="text-left">◑${rvo.name }(${rvo.dbday })</td>
+                 <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-left" valign="top"><pre style="white-space: pre-wrap;background-color: white;border: none">${rvo.msg }</pre></td>
+                </tr>
+              </table>
+            </c:forEach>
+           </td>
+          </tr>
+        </table>
+        <c:if test="${sessionScope.id!=null }">
+          <table class="table">
+            <tr>
+             <td>
+              <form method="post" action="../reply/insert.do">
+                <input type=hidden name=rno value="${vo.fno }">
+                <input type=hidden name=type value="1">
+                <textarea rows="5" cols="85" name="msg" style="float: left"></textarea>
+                <input type=submit value="댓글쓰기" style="float: left;height: 104px" class="btn btn-sm btn-primary">
+              </form>
+             </td>
+            </tr>
+          </table>
+        </c:if>
       </div>
       <div class="col-sm-4">
         <div class="map_wrap">

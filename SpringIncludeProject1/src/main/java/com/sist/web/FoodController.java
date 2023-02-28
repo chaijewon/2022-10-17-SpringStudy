@@ -12,6 +12,9 @@ import com.sist.vo.*;
 public class FoodController {
   @Autowired
   private FoodDAO dao;
+  
+  @Autowired
+  private ReplyDAO rdao;
   //include / forward => request를 공유 
   @GetMapping("food/food_list.do")
   /*
@@ -47,7 +50,7 @@ public class FoodController {
   }
   //food/detail.do?fno=${fvo.fno }&cno=1
   @GetMapping("food/detail.do")
-  public String food_detail(int fno,Model model)
+  public String food_detail(int fno,int type,Model model)
   {
 	  // DAO연동 
 	  FoodVO vo=dao.foodDetailData(fno);
@@ -55,6 +58,10 @@ public class FoodController {
 	  model.addAttribute("addr", addrs[1].trim());
 	  model.addAttribute("vo", vo);
 	  model.addAttribute("main_jsp", "../food/detail.jsp");
+	  // 댓글 읽기 
+	  List<ReplyVO> rList=rdao.replyListData(fno, type);
+	  // => type(1:맛집,2:제주,3:서울)
+	  model.addAttribute("rList", rList);
 	  return "main/main";
   }
 }
