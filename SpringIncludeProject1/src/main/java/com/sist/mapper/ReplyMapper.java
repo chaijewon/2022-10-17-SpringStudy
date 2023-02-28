@@ -2,6 +2,8 @@ package com.sist.mapper;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 import com.sist.vo.*;
@@ -22,8 +24,8 @@ public interface ReplyMapper {
 		END;
 		/
    */
-	// 목록 
-	@Select(value="{CALL replyList(#{pRno,mode=IN,jdbcType=INTEGER},#{pType,mode=IN,jdbcType=INTEGER},#{pResult,mode=OUT,jdbcType=CURSOR})}")
+
+	@Select(value="{CALL replyList(#{pRno,mode=IN,javaType=java.lang.Integer},#{pType,mode=IN,javaType=java.lang.Integer},#{pResult,mode=OUT,jdbcType=CURSOR,resultMap=replyMap})}")
     @Options(statementType=StatementType.CALLABLE)
 	public List<ReplyVO> replyListData(Map map);
 	
@@ -43,7 +45,7 @@ public interface ReplyMapper {
 		END;
 		/
 	 */
-	@Select(value="{CALL replyInsert(#{pRno,mode=IN,jdbcType=INTEGER},#{pType,mode=IN,jdbcType=INTEGER},#{pId,mode=IN,jdbcType=VARCHAR},#{pName,mode=IN,jdbcType=VARCHAR},#{pMsg,mode=IN,jdbcType=CLOB})}")
+	@Select(value="{CALL replyInsert(#{pRno,mode=IN,javaType=java.lang.Integer},#{pType,mode=IN,javaType=java.lang.Integer},#{pId,mode=IN,javaType=java.lang.String},#{pName,mode=IN,javaType=java.lang.String},#{pMsg,mode=IN,javaType=java.lang.String})}")
 	@Options(statementType=StatementType.CALLABLE)
 	public void replyInsert(Map map);
 	
@@ -63,7 +65,7 @@ public interface ReplyMapper {
 		/
 	 */
 	
-	@Select(value="{CALL replyUpdate(#{pNo,mode=IN,jdbcType=INTEGER},#{pMsg,mode=IN,jdbcType=CLOB})}")
+	@Select(value="{CALL replyUpdate(#{pNo,mode=IN,javaType=java.lang.Integer},#{pMsg,mode=IN,javaType=java.lang.String})}")
 	@Options(statementType=StatementType.CALLABLE)
 	public void replyUpdate(Map map);
 	
@@ -79,7 +81,7 @@ public interface ReplyMapper {
 		END;
 		/
 	 */
-	@Select(value="{CALL replyDelete(#{pNo,mode=IN,jdbcType=INTEGER)}")
+	@Select(value="{CALL replyDelete(#{pNo,mode=IN,javaType=java.lang.Integer})}")
 	@Options(statementType = StatementType.CALLABLE)
 	public void replyDelete(Map map);
 	/*

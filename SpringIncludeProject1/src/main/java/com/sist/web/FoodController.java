@@ -14,7 +14,8 @@ public class FoodController {
   private FoodDAO dao;
   
   @Autowired
-  private ReplyDAO rdao;
+  //private ReplyDAO rdao;
+  private ReplyOrmDAO rdao;
   //include / forward => request를 공유 
   @GetMapping("food/food_list.do")
   /*
@@ -59,7 +60,11 @@ public class FoodController {
 	  model.addAttribute("vo", vo);
 	  model.addAttribute("main_jsp", "../food/detail.jsp");
 	  // 댓글 읽기 
-	  List<ReplyVO> rList=rdao.replyListData(fno, type);
+	  Map map=new HashMap();
+	  map.put("pRno", fno);
+	  map.put("pType", type);
+	  //List<ReplyVO> rList=rdao.replyListData(fno, type);
+	  List<ReplyVO> rList=rdao.replyListData(map);
 	  // => type(1:맛집,2:제주,3:서울)
 	  model.addAttribute("rList", rList);
 	  return "main/main";

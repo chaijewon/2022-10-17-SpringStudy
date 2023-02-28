@@ -20,7 +20,8 @@ public class ReplyOrmDAO {
 	public List<ReplyVO> replyListData(Map map)
 	{
 		//map.put("pRno", rno)
-		return replyListData(map);
+		mapper.replyListData(map);
+		return (List<ReplyVO>)map.get("pResult");
 	}
 	
 	//@Select(value="{CALL replyInsert(#{pRno,mode=IN,jdbcType=INTEGER},#{pType,mode=IN,jdbcType=INTEGER},
