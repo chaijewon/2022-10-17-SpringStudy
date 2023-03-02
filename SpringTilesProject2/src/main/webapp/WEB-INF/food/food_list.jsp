@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
-.row{
+.row1{
    margin: 0px auto;
-   width:800px;
+   width:900px;
 }
 h1{
    text-align: center;
@@ -18,22 +18,23 @@ h1{
 </style>
 </head>
 <body>
-<div class="jumbotron">
+   <div class="container">
+   <div class="jumbotron">
       <h3 class="text-center">${vo.title }</h3>
       <h4 class="text-center">${vo.subject }</h4>
     </div>
-    <div class="row">
+    <div class="row row1">
       <table class="table">
         <tr>
           <td>
-            <c:forEach var="fvo" items="${fList }">
+            <c:forEach var="fvo" items="${list }">
              <table class="table">
                <tr>
                  <td width=30% class="text-center" rowspan="4">
-                   <a href="../food/detail.do?fno=${fvo.fno }&type=1"><img src="${fvo.poster }" style="width: 100%" class="img-rounded"></a>
+                   <a href="../food/detail_before.do?fno=${fvo.fno }"><img src="${fvo.poster }" style="width: 100%" class="img-rounded"></a>
                  </td>
                  <td width=70%>
-                   <h3><a href="../food/detail.do?fno=${fvo.fno }&type=1">${fvo.name }</a>&nbsp;<span style="color:orange">${fvo.score }</span></h3>
+                   <h3><a href="../food/detail_before.do?fno=${fvo.fno }">${fvo.name }</a>&nbsp;<span style="color:orange">${fvo.score }</span></h3>
                  </td>
                </tr>
                <tr>
@@ -50,6 +51,7 @@ h1{
           </td>
         </tr>
       </table>
+    </div>
     </div>
 </body>
 </html>

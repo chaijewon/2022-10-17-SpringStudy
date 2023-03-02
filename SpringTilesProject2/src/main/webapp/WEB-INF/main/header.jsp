@@ -16,6 +16,15 @@
       <li class="active"><a href="../main/main.do">Home</a></li>
       <li><a href="../member/join.do">회원가입</a></li>
       <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">맛집
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="../food/food_search.do">맛집찾기</a></li>
+          <li><a href="../food/food_recommand.do">맛집추천</a></li>
+          <li><a href="../food/food_news.do">맛집뉴스</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">서울여행
         <span class="caret"></span></a>
         <ul class="dropdown-menu">

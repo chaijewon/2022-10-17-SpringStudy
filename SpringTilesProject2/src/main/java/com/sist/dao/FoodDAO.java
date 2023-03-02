@@ -24,4 +24,35 @@ public class FoodDAO {
    {
 	   return mapper.foodListData(cno);
    }
+   
+   /*@Select("SELECT title,subject FROM project_category "
+			 +"WHERE cno=#{cno}")*/
+   public CategoryVO categoryInfoData(int cno)
+   {
+	   return mapper.categoryInfoData(cno);
+   }
+   /*@Select("SELECT * FROM project_food "
+			 +"WHERE fno=#{fno}")*/
+   public FoodVO foodDetailData(int fno)
+   {
+	   return mapper.foodDetailData(fno);
+   }
+   
+   /*@Select("SELECT fno,name,poster,num "
+			 +"FROM (SELECT fno,name,poster,rownum as num "
+			 +"FROM (SELECT fno,name,poster "
+			 +"FROM food_location WHERE address LIKE '%'||#{addr}||'%' ORDER BY fno ASC)) "
+			 +"WHERE num BETWEEN #{start} AND #{end}")*/
+   public List<FoodVO> foodSearchData(Map map)
+   {
+	  return mapper.foodSearchData(map);	  
+   }
+   
+   /*@Select("SELECT CEIL(COUNT(*)/20.0) "
+			 +"FROM food_location "
+			 +"WHERE address LIKE '%'||#{addr}||'%'")*/
+   public int foodSearchTotalPage(Map map)
+   {
+	   return mapper.foodSearchTotalPage(map);
+   }
 }
