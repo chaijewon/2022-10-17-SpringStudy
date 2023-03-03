@@ -87,6 +87,22 @@ public class FoodController {
   {
 	  return "food/food_search";
   }
+  @GetMapping("food/location_detail_before.do")
+  public String food_location_detail_before(int fno,HttpServletResponse response,RedirectAttributes ra)
+  {
+	  Cookie cookie=new Cookie("location"+fno, String.valueOf(fno));
+	  cookie.setPath("/");
+	  cookie.setMaxAge(60*60*24);
+	  response.addCookie(cookie);
+	  ra.addAttribute("fno", fno);
+	  return "redirect:../food/location_detail.do";
+  }
+  @GetMapping("food/location_detail.do")
+  public String food_location_detail(int fno,Model model)
+  {
+	  model.addAttribute("fno", fno);
+	  return "food/location_detail";
+  }
 }
 
 

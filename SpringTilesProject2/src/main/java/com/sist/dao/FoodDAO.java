@@ -55,4 +55,11 @@ public class FoodDAO {
    {
 	   return mapper.foodSearchTotalPage(map);
    }
+   
+   /*@Select("SELECT * FROM food_location "
+			 +"WHERE fno=#{fno}")*/
+   public FoodVO foodLocationDetailData(int fno)
+   {
+	   return mapper.foodLocationDetailData(fno);
+   }
 }

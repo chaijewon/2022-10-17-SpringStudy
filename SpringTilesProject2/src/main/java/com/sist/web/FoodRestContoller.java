@@ -3,6 +3,7 @@ package com.sist.web;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
@@ -64,6 +65,24 @@ public class FoodRestContoller {
 	   return arr.toJSONString();
 	   
    }
+   @GetMapping(value="food/location_detail_vue.do",produces = "text/plain;charset=UTF-8")
+   public String food_location_detail(int fno)
+   {
+	   FoodVO vo=dao.foodLocationDetailData(fno);
+	   JSONObject obj=new JSONObject();
+	   obj.put("fno", vo.getFno());
+	   obj.put("name", vo.getName());
+	   obj.put("poster", vo.getPoster());
+	   obj.put("tel", vo.getTel());
+	   obj.put("address", vo.getAddress());
+	   obj.put("parking", vo.getParking());
+	   obj.put("time", vo.getTime());
+	   obj.put("price", vo.getPrice());
+	   obj.put("type", vo.getType());
+	   obj.put("menu", vo.getMenu());
+	   return obj.toJSONString();
+   }
+   
 }
 
 
