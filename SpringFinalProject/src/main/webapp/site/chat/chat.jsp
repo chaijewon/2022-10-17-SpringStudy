@@ -27,6 +27,7 @@ h1{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script type="text/javascript">
 let websocket;
+let name;
 function connection() // 연결
 {
 	 // websocket => 웹에서 연결이 되게 만드는 소프트웨어 
@@ -34,6 +35,7 @@ function connection() // 연결
 	 websocket.onopen=onOpen;//callback(시스템 자동으로 호출)
 	 websocket.onclose=onClose;
 	 websocket.onmessage=onMessage;
+	 name=$('#startBtn').attr("data-name")
 }
 function onOpen(event) // 연결되었을때 처리 
 {
@@ -47,7 +49,7 @@ function onClose(event) // 퇴장시 처리
 function onMessage(event) // 채팅 메세지 전송시 
 {
 	let data=event.data;
-	if(data.substring(0,4)=="msg:")
+	if(data.substring(0,4)=="msg:") //onetoone:
 	{
 		appendMessage(data.substring(4));
 	}
@@ -60,12 +62,6 @@ function disConnection()
 }
 function send()
 {
-	let name=$('#name').val()
-	if(name.trim()=="")
-	{
-		$('#name').focus()
-		return
-	}
 	let msg=$('#sendMsg').val();
 	if(msg.trim()=="")
 	{
@@ -114,8 +110,7 @@ $(function(){
       <table class="table">
        <tr>
         <td>
-         <input type=text id="name" class="input-sm" size=15>
-         <input type=button id="startBtn" value="입장" class="btn btn-sm btn-danger">
+         <input type=button id="startBtn" value="입장" class="btn btn-sm btn-danger" data-name="${sessionScope.name }">
          <input type=button id="endBtn" value="퇴장" class="btn btn-sm btn-primary">
          <a href="../main/main.do" class="btn btn-sm btn-warning">메인</a>
         </td>

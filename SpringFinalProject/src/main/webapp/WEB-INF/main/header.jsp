@@ -14,7 +14,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">Gravity</a></h1>
+      <h1><a href="../main/main.do">Recipe & Food</a></h1>
     </div>
     <div class="fl_right">
      <c:if test="${sessionScope.id==null }">
