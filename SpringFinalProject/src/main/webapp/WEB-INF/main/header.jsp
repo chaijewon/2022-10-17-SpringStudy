@@ -121,7 +121,9 @@
 			  })
 		  },
 		  logout:function(){
-			  
+			  axios.get('http://localhost/web/member/logout_vue.do').then(function(response){
+				  location.href="../main/main.do";
+			  })
 		  }
 	  }
   })

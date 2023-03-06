@@ -25,4 +25,11 @@ public class MemberController {
 	   }
 	   return res;
    }
+   
+   @GetMapping("member/logout_vue.do")
+   public String member_logout(HttpSession session)
+   {
+	   session.invalidate();
+	   return "";
+   }
 }
