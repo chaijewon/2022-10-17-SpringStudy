@@ -65,4 +65,28 @@ public class BoardRestController {
 	   obj.put("content", vo.getContent());
 	   return obj.toJSONString();
    }
+   
+   @GetMapping(value="board/update_vue.do",produces = "text/plain;charset=UTF-8")
+   public String board_update(int no)
+   {
+	   BoardVO vo=dao.boardDetailData(no);
+	   JSONObject obj=new JSONObject();
+	   obj.put("no", vo.getNo());
+	   obj.put("subject", vo.getSubject());
+	   obj.put("name", vo.getName());
+	   obj.put("content", vo.getContent());
+	   return obj.toJSONString();
+   }
+   @GetMapping("board/update_ok_vue.do")
+   public String board_update_ok(BoardVO vo)
+   {
+	   String res=dao.boardUpdate(vo);
+	   return res;
+   }
+   @GetMapping("board/delete_vue.do")
+   public String board_delete_ok(int no,String pwd)
+   {
+	   String res=dao.boardDelete(no, pwd);
+	   return res;
+   }
 }

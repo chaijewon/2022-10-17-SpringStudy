@@ -27,11 +27,11 @@
       </tr>
       <tr>
         <th width=20%>비밀번호</th>
-        <td width=80%><input type=password size="10" class="input-sm" v-model="pwd"></td>
+        <td width=80%><input type=password size="10" class="input-sm" v-model="pwd" ref="pwd"></td>
       </tr>
       <tr>
         <td colspan="2" class="text-center">
-         <input type=button value="수정하기" class="btn btn-sm btn-primary" v-on:click="write()">
+         <input type=button value="수정하기" class="btn btn-sm btn-primary" v-on:click="update()">
          <input type=button value="취소" class="btn btn-sm btn-info" onclick="javascript:history.back()">
         </td>
       </tr>
@@ -39,7 +39,7 @@
   </main>
 </div>
 <script>
-  new Vue({
+new Vue({
 	  el:'.rows',
 	  data:{
 		  name:'',
@@ -48,8 +48,7 @@
 		  pwd:'',
 		  no:${no}
 	  },
-	  methods:{
-		  write:function(){
+	  mounted:function(){
 			  let _this=this;
 			  axios.get('http://localhost/web/board/update_vue.do',{
 				  params:{
@@ -60,9 +59,34 @@
 				  _this.subject=response.data.subject
 				  _this.content=response.data.content
 			  })
+	  },
+	  methods:{
+		  update:function(){
+			  let _this=this;
+			  axios.get('http://localhost/web/board/update_ok_vue.do',{
+				  params:{
+					 no:this.no,
+					 name:this.name,
+					 subject:this.subject,
+					 content:this.content,
+					 pwd:this.pwd
+				  }
+			  }).then(function(response){
+				  let res=response.data;
+				  if(res==='yes')
+				  {
+					  location.href="../board/detail.do?no="+_this.no
+				  }
+				  else
+				  {
+					  alert('비밀번호가 틀립니다!!')
+					  _this.pwd='';
+					  _this.$refs.pwd.focus() // $('#pwd').focus()
+				  }
+			  })
 		  }
 	  }
-  })
+})
 </script>
 </body>
 </html>

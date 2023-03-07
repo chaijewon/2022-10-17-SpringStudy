@@ -35,7 +35,7 @@
       <tr>
         <td colspan="4" class="text-right">
           <a :href="'../board/update.do?no='+board_detail.no" class="btn btn-xs btn-danger">수정</a>
-          <a href="#" class="btn btn-xs btn-success">삭제</a>
+          <a :href="'../board/delete.do?no='+board_detail.no" class="btn btn-xs btn-success">삭제</a>
           <a href="../board/list.do" class="btn btn-xs btn-info">목록</a>
         </td>
       </tr>
