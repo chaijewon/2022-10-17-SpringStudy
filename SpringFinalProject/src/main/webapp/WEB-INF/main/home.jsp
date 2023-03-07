@@ -107,6 +107,15 @@
     <!-- ################################################################################################ --> 
     <!-- / main body -->
     <h2 class="sectiontitle">최근 방문 맛집</h2>
+    <div class="flexslider carousel basiccarousel btmspace-80">
+      <ul class="slides">
+        <li v-for="vo in cookie_list">
+          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="">
+            <figcaption><a :href="'../food/food_detail.do?fno='+vo.fno">{{vo.name}}</a></figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
     <h2 class="sectiontitle">최근 방문 레시피</h2>
     <div class="clear"></div>
   </main>
@@ -115,7 +124,8 @@
   new Vue({
 	  el:'.rows',
 	  data:{
-		  cate_list:[]
+		  cate_list:[],
+		  cookie_list:[]
 	  },
 	  mounted:function(){
 		  let _this=this;
@@ -123,6 +133,10 @@
 			  console.log(response.data)
 			  _this.cate_list=response.data
 		  })
+		  axios.get("http://localhost/web/food/cookie_data_vue.do").then(function(response){
+			  _this.cookie_list=response.data
+		  })
+		  
 	  }
   })
 </script>

@@ -2,6 +2,7 @@ package com.sist.dao;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +34,21 @@ public class FoodDAO {
   {
 	  return mapper.foodListData(cno);
   }
+  
+   /*@Update("UPDATE project_food SET "
+		  +"hit=hit+1 "
+		  +"WHERE fno=#{fno}")
+   public void foodHitIncrement(int fno);
+   
+   @Select("SELECT * FROM project_food "
+		  +"WHERE fno=#{fno}")
+   public FoodVO foodDetailData(int fno);*/
+    public FoodVO foodDetailData(int fno) {
+	   mapper.foodHitIncrement(fno);
+	   return mapper.foodDetailData(fno);
+    }
+
+	public FoodVO foodCookieDetailData(int fno) {
+		  return mapper.foodDetailData(fno);
+	}
 }
