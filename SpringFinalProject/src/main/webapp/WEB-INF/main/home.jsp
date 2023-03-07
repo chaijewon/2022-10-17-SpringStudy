@@ -56,7 +56,7 @@
     <div class="flexslider carousel basiccarousel btmspace-80">
       <ul class="slides">
         <li v-for="(vo,index) in cate_list" v-if="index>=0 && 12>index">
-          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="">
+          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="" style="width: 320px;height: 185px">
             <figcaption><a :href="'../food/food_list.do?cno='+vo.cno">{{vo.title}}</a></figcaption>
           </figure>
         </li>
@@ -68,7 +68,7 @@
     <div class="flexslider carousel basiccarousel btmspace-80">
       <ul class="slides">
         <li v-for="(vo,index) in cate_list" v-if="index>=12 && 18>index">
-          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="">
+          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="" style="width: 320px;height: 185px">
             <figcaption><a :href="'../food/food_list.do?cno='+vo.cno">{{vo.title}}</a></figcaption>
           </figure>
         </li>
@@ -79,7 +79,7 @@
     <div class="flexslider carousel basiccarousel btmspace-80">
       <ul class="slides">
         <li v-for="(vo,index) in cate_list" v-if="index>=18 && 30>index">
-          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="">
+          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="" style="width: 320px;height: 185px">
             <figcaption><a :href="'../food/food_list.do?cno='+vo.cno">{{vo.title}}</a></figcaption>
           </figure>
         </li>
@@ -87,6 +87,17 @@
        
       </ul>
     </div>
+    <h2 class="sectiontitle">최근 방문 맛집</h2>
+    <div class="flexslider carousel basiccarousel btmspace-80">
+      <ul class="slides">
+        <li v-for="vo in cookie_list">
+          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="" style="width: 320px;height: 185px">
+            <figcaption><a :href="'../food/food_detail.do?fno='+vo.fno">{{vo.name}}</a></figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
+    <h2 class="sectiontitle">최근 방문 레시피</h2>
     <!-- ################################################################################################ -->
     <h2 class="sectiontitle">추천 맛집과 레시피</h2>
     <!-- ################################################################################################ -->
@@ -106,17 +117,7 @@
     </ul>
     <!-- ################################################################################################ --> 
     <!-- / main body -->
-    <h2 class="sectiontitle">최근 방문 맛집</h2>
-    <div class="flexslider carousel basiccarousel btmspace-80">
-      <ul class="slides">
-        <li v-for="vo in cookie_list">
-          <figure><img class="radius-10 btmspace-10" :src="vo.poster" alt="">
-            <figcaption><a :href="'../food/food_detail.do?fno='+vo.fno">{{vo.name}}</a></figcaption>
-          </figure>
-        </li>
-      </ul>
-    </div>
-    <h2 class="sectiontitle">최근 방문 레시피</h2>
+   
     <div class="clear"></div>
   </main>
 </div>
