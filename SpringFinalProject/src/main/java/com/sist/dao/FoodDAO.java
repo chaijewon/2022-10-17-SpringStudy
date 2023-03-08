@@ -51,4 +51,41 @@ public class FoodDAO {
 	public FoodVO foodCookieDetailData(int fno) {
 		  return mapper.foodDetailData(fno);
 	}
+	
+	/*
+	 *   // 검색 
+	   @Select("SELECT fno,name,poster,score,num "
+			  +"FROM (SELECT fno,name,poster,score,rownum as num "
+			  +"FROM (SELECT fno,name,poster,score "
+			  +"FROM food_location "
+			  +"WHERE address LIKE '%'||#{address}||'%' ORDER BY fno ASC)) "
+			  +"WHERE num BETWEEN #{start} AND #{end}")
+	   public List<FoodVO> foodLocationFindData(Map map);
+	   
+	   // 상세보기 
+	   @Select("SELECT * FROM food_location "
+			  +"WHERE fno=#{fno}")
+	   public FoodVO foodLocationDetailData(int fno);
+	 */
+	public List<FoodVO> foodLocationFindData(Map map){
+		return mapper.foodLocationFindData(map);
+	}
+	public FoodVO foodLocationDetailData(int fno) {
+		return mapper.foodLocationDetailData(fno);
+	}
+	/*@Select("SELECT CEIL(COUNT(*)/20.0) "
+			  +"FROM food_location "
+			  +"WHERE address LIKE '%'||#{address}||'%'")*/
+	public int foodFindTotalPage(String address) {
+		return mapper.foodFindTotalPage(address);
+	}
+	// Top-N = 인라인뷰 이용 
+	/*@Select("SELECT fno,name,address,rownum "
+			  +"FROM (SELECT fno,name,address "
+			  +"FROM project_food ORDER BY hit DESC) "
+			  +"WHERE rownum<=7")*/
+	public List<FoodVO> foodTop7()
+	{
+		return mapper.foodTop7();
+	}
 }
