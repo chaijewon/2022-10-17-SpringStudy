@@ -56,12 +56,14 @@ import com.sist.dao.FoodDAO;
  */
 import com.sist.vo.*;
 import java.util.*;
+import com.sist.openapi.*;
 @Aspect
 @Component
 public class CommonAspect {
   @Autowired
   private FoodDAO dao;
-  
+  //@Autowired
+  //private NaverNewsManager mgr;
   @Around("execution(* com.sist.web.*Controller.*(..))")
   public Object around(ProceedingJoinPoint jp) throws Throwable{
 	  Object obj=null;
@@ -86,6 +88,10 @@ public class CommonAspect {
 		  vo.setAddress(addr[1].trim());
 	  }
 	  request.setAttribute("tList", tList);
+	  
+	  //List<NewsVO> nList=mgr.newsListData("맛집");
+	  //request.setAttribute("nList", nList);
+	  
   }
 }
 
