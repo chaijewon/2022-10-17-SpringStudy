@@ -59,7 +59,8 @@
    <div class="row3">
        <ul class="pagination" style="text-align: center;width:100%">
 		  <li v-if="startPage>1"><span class="btn btn-xs btn-default" v-on:click="prev()">&lt;</span></li>
-		  <li v-for="i in range(startPage,endPage)"><span class="btn btn-xs btn-default" v-on:click="pageChange(i)">{{i}}</span></li>
+		  <li v-for="i in range(startPage,endPage)" v-if="i===curpage" class="active"><span class="btn btn-xs btn-default" v-on:click="pageChange(i)">{{i}}</span></li>
+		  <li v-else><span class="btn btn-xs btn-default" v-on:click="pageChange(i)">{{i}}</span></li>
 		  <li v-if="totalpage>endPage"><span class="btn btn-xs btn-default" v-on:click="next()">&gt;</span></li>
 		</ul>
    </div>
