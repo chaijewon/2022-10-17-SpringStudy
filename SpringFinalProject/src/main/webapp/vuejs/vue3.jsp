@@ -30,10 +30,9 @@ h1{
     <div class="row">
       <!-- <b-button id="show-btn" variant="outline-danger" @click="showMovie">동영상</b-button> -->
       <music v-bind:musicdata="music_list"></music>
-      <b-modal ref="my-modal" hide-footer title="Modal Component">
+      <b-modal ref="my-modal" hide-footer :title="music_detail.title" v-if="isShow" id="modal-lg" size="lg">
          <div class="text-center">
-          <h4>{{music_detail.title}}</h4>
-          <iframe :src="'http://youtube.com/embed/'+music_detail.key" style="width: 100%"></iframe>
+          <iframe :src="'http://youtube.com/embed/'+music_detail.key" style="width: 600px;height: 500px"></iframe>
          </div>
       </b-modal>
     </div>
@@ -58,13 +57,13 @@ h1{
 	           +'<td>{{m.title}}</td>'
 	           +'<td>{{m.singer}}</td>'
 	           +'<td>{{m.album}}</td>'
-	           +'<td class="text-center"><b-button id="show-btn" variant="outline-danger" @click="showMovie(m.no)">동영상</b-button></td>'
+	           +'<td class="text-center"><b-button id="show-btn" variant="outline-danger" @click="showMovie(m.no,true)">동영상</b-button></td>'
 	           +'</tr>'
 	           +'</tbody>'
 	           +'</table>',
 	           methods:{
-	        	   showMovie:function(value){
-	        		   eventBus.$emit('showMovieEvent',value)
+	        	   showMovie:function(value,bool){
+	        		   eventBus.$emit('showMovieEvent',value,bool)
 	        	   }
 	           }
 	           
@@ -73,7 +72,8 @@ h1{
 	   el:'.container',
 	   data:{
 		   music_list:[],
-		   music_detail:{}
+		   music_detail:{},
+		   isShow:false
 	   },
 	   mounted:function(){
 		   let _this=this;
@@ -83,7 +83,8 @@ h1{
 	   },
 	   updated:function(){
 		 let _this=this;
-		 eventBus.$on('showMovieEvent',function(value){
+		 eventBus.$on('showMovieEvent',function(value,bool){
+			 _this.isShow=bool
 			 axios.get('http://localhost/web/music/detail.do',{
 				 params:{
 					 no:value
