@@ -126,11 +126,48 @@ public class RecommandRestController {
     	}
     	return arr.toJSONString();
     }
-    @GetMapping(value="food/recommand_detail.do",produces = "text/plain;charset=UTF-8")
-    public String recommand_detail(int fno)
+    @GetMapping(value="food/food_location_detail_vue.do",produces = "text/plain;charset=UTF-8")
+    public String food_detail_vue(int fno)
     {
-    	return "";
+ 	   FoodVO vo=dao.foodLocationDetailData(fno);
+ 	   // VO=>{}
+ 	   String address=vo.getAddress();
+ 	   String addr1=address.substring(0,address.lastIndexOf("지"));
+ 	   String addr2=address.substring(address.lastIndexOf("지")+3);
+ 	   // 지번 서울시...
+ 	   JSONObject obj=new JSONObject();
+ 	   obj.put("fno", vo.getFno());
+ 	   obj.put("name", vo.getName());
+ 	   obj.put("score", vo.getScore());
+ 	   obj.put("addr1", addr1.trim());
+ 	   obj.put("addr2", addr2.trim());
+ 	   obj.put("tel", vo.getTel());
+ 	   obj.put("type", vo.getType());
+ 	   obj.put("time", vo.getTime());
+ 	   obj.put("price", vo.getPrice());
+ 	   obj.put("parking", vo.getParking());
+ 	   String menu=vo.getMenu();
+ 	   JSONArray arr1=new JSONArray();
+ 	   if(!menu.equals("no"))
+ 	   {
+ 		   String[] s=menu.split("원");
+ 		   for(String ss:s)
+ 		   {
+ 			   arr1.add(ss);
+ 		   }
+ 	   }
+ 	   JSONArray arr2=new JSONArray();
+ 	   String poster=vo.getPoster();
+ 	   StringTokenizer st=new StringTokenizer(poster,"^");
+ 	   while(st.hasMoreTokens())
+ 	   {
+ 		   arr2.add(st.nextToken());
+ 	   }
+ 	   obj.put("menu", arr1);
+ 	   obj.put("poster", arr2);
+ 	   return obj.toJSONString();
     }
+    
 }
 
 
