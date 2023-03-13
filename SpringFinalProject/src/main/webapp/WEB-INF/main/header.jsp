@@ -48,7 +48,7 @@
       <li><a class="drop" href="#">맛집</a>
         <ul>
           <li><a href="../food/food_find.do">지역별 찾기</a></li>
-          <li><a href="../food/food_recommand.do">맛집 추천</a></li>
+          <li><a href="../food/recommand.do">맛집 추천</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">제주</a>
