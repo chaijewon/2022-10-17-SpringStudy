@@ -11,9 +11,9 @@
 <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
 <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
+<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
 <style type="text/css">
 .container{
    margin-top: 50px;
@@ -51,12 +51,12 @@ h1{
     <div class="row">
       <recommand_result v-bind:redata="recommand_data"></recommand_result>
     </div>
-    <div class="dialog" title="맛집 상세보기" style="display:none">
+    <div class="dialog" title="맛집 상세보기" v-if="isShow">
      <div class="row">
       <table class="table">
        <tr>
          <td v-for="img in food_detail.poster">
-           <img :src="img" style="width: 180px;height:150px">
+           <img :src="img" style="width: 100%">
          </td>
        </tr>
       </table>
@@ -133,13 +133,14 @@ h1{
 	           +'</div>',
 	  methods:{
 		  recommandDetail:function(fno){
-			  this.$parent.recommandDetail(fno)
-			  $('.dialog').dialog({
+			  this.$parent.recommandDetail(fno,true)
+			  /*$('.dialog').dialog({
 					 autoOpen:false,
 					 modal:true,
 					 width:1200,
 					 height:800
-				 }).dialog("open")
+				 }).dialog("open")*/
+			 //this.$refs.dialog.show()
 		  }  
 	  }
 	 
@@ -149,27 +150,21 @@ h1{
 	 data:{
 		 recommand_list:[],
 		 recommand_data:[],
-		 food_detail:{}
+		 food_detail:{},
+		 isShow:false
 	 },
-	 /* mounted:function(){
-		  if(window.kakao && window.kakao.maps)
-		  {
-			  this.initMap();
-		  }
-		  else
-		  {
-			  this.addScript();
-		  }
-	 },*/
+	/*  mounted:function(){
+		  
+	 }, */
 	 methods:{
-		 /*addScript:function(){
+		 addScript:function(){
 			 const script=document.createElement("script")
-			   global kakao 
+			   /* global kakao */
 			  script.onload = () => kakao.maps.load(this.initMap)
 			  script.src='http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b18319530b6d6d62d5c86a8807893413&libraries=services'
 			  document.head.appendChild(script)
 		  },
-		  initMap:function(){
+		  initMap:function(name){
 			  //let name=this.food_detail.name;
 			  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
@@ -198,9 +193,9 @@ h1{
 			        });
                    
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
-			        
+			        //let a=this.food_detail.name;
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$('#name').text()+'</div>'
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+name+'</div>'
 			        });
 			        infowindow.open(map, marker);
 
@@ -208,7 +203,7 @@ h1{
 			        map.setCenter(coords);
 			    } 
 			});    
-		  }, */
+		  }, 
 		 change:function(no){
 			 let _this=this;
 			 axios.get("http://localhost/web/food/recommand_change.do",{
@@ -231,9 +226,10 @@ h1{
 				 _this.recommand_data=response.data
 			 })
 		 },
-		 recommandDetail:function(fno){
-			 alert("fno="+fno)
+		 recommandDetail:function(fno,show){
+			 //alert("fno="+fno)
 			 let _this=this;
+			 this.isShow=show
 			 axios.get("http://localhost/web/food/food_location_detail_vue.do",{
 				 params:{
 					 fno:fno
@@ -241,6 +237,15 @@ h1{
 			 }).then(function(response){
 				 console.log(response.data)
 				 _this.food_detail=response.data
+				 
+				 if(window.kakao && window.kakao.maps)
+				  {
+					  _this.initMap(_this.food_detail.name);
+				  }
+				  else
+				  {
+					  _this.addScript();
+				  }
 				 
 			 })
 		 }
