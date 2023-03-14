@@ -92,7 +92,7 @@
 			  }
 		  }).then(function(response){
 			  console.log(response.data)
-			  _this.food_detail=response.data
+			  _this.food_detail=response.data //{}
 			 
 			  if(window.kakao && window.kakao.maps)
 			  {

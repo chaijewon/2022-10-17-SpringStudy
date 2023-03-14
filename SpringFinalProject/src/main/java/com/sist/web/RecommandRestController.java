@@ -163,6 +163,14 @@ public class RecommandRestController {
  	   {
  		   arr2.add(st.nextToken());
  	   }
+ 	   
+ 	   /*
+ 	    *    v-for="(index) in menu"
+ 	    *    {{menu[index]}}
+ 	    *    {{food_detail.poster[index]}}
+ 	    *    
+ 	    *    food_detail
+ 	    */
  	   obj.put("menu", arr1);
  	   obj.put("poster", arr2);
  	   return obj.toJSONString();

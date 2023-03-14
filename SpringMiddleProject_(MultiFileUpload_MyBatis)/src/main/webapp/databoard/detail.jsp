@@ -96,6 +96,7 @@ $(function(){ // window.onload => main
 	         <th width=20% class="text-center success">첨부파일</th>
 	         <td colspan="3">
 	           <ul>
+	             <!-- v-for="(s,index) in fn" -->
 	             <c:forEach var="fn" items="${nList }" varStatus="s">
 	               <li><a href="download.do?fn=${fn }">${fn }</a>(${sList[s.index]}Bytes)</li>
 	             </c:forEach>
