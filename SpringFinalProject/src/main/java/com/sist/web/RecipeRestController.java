@@ -110,7 +110,10 @@ public class RecipeRestController {
   public String goods_price_vue(String goods_name)
   {
 	  // [0-9A-Za-z]
-	  String name=goods_name.replaceAll("[^가-힣]","");
+	  String name=goods_name.replaceAll("[0-9A-Za-z] ","");
+	  name=name.replace(" ", "|");
+	  name=name.replace("||", "|");
+	  System.out.println(name);
 	  List<GoodsVO> list=service.goodsListData(name);
 	  JSONArray arr=new JSONArray();
 	  for(GoodsVO vo:list)
@@ -119,11 +122,11 @@ public class RecipeRestController {
 		  obj.put("no", vo.getNo());
 		  obj.put("goods_poster", vo.getGoods_poster());
 		  String gname=vo.getGoods_name();
-		  if(gname.length()>10)
-		  {
-			  gname=gname.substring(0,10)+"...";
-			  
-		  }
+			/*
+			 * if(gname.length()>10) { gname=gname.substring(0,10)+"...";
+			 * 
+			 * }
+			 */
 		  obj.put("goods_name", gname);
 		  obj.put("goods_price", vo.getGoods_price());
 		  

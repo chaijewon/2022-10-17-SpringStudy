@@ -75,7 +75,7 @@
     </div>
     <div class="one_half" v-if="isShow">
       <div>
-       <div class="col-md-4" v-for="m in goods_list">
+       <div class="col-md-12" v-for="m in goods_list">
 	    <div class="thumbnail">
 	      <a href="#">
 	        <img :src="m.goods_poster" alt="Lights" style="width:100%">
