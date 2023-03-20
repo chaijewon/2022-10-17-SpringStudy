@@ -19,9 +19,14 @@
     <div class="fl_right">
      <c:if test="${sessionScope.id==null }">
       <ul class="inline">
-        <li>ID:<input type=text name="id" size=15 class="input-sm" v-model="id" ref="id"></li>
+        <li>ID:<input type=text name="id" size=15 class="input-sm"  ref="id" value="${id}"></li>
         <li>PW:<input type=password name=pwd class="input-sm" v-model="pwd" ref="pwd"></li>
-        <li>ID 저장:<input type="checkbox" name="ck" v-model="ck"></li>
+        <c:if test="${ck==true }">
+          <li>ID 저장:<input type="checkbox" ref="ck"  checked></li>
+        </c:if>
+        <c:if test="${ck==false }">
+          <li>ID 저장:<input type="checkbox" ref="ck" ></li>
+        </c:if>
         <li><input type=button value="로그인" class="btn btn-sm btn-danger" v-on:click="login()"></li>
       </ul>
      </c:if>
@@ -97,6 +102,9 @@
 	  },
 	  methods:{
 		  login:function(){
+			  
+			  this.id=this.$refs.id.value;
+			  this.ck=this.$refs.ck.checked;
 			  alert("ck="+this.ck)
 			  if(this.id.trim()=="")
 			  {
@@ -110,7 +118,7 @@
 			  }
 			  
 			  let _this=this
-			  axios.get('http://localhost/web/member/login_vue.do',{
+			  axios.get('../member/login_vue.do',{
 				  params:{
 					  id:this.id,
 					  pwd:this.pwd,
@@ -139,7 +147,7 @@
 			  })
 		  },
 		  logout:function(){
-			  axios.get('http://localhost/web/member/logout_vue.do').then(function(response){
+			  axios.get('../member/logout_vue.do').then(function(response){
 				  location.href="../main/main.do";
 			  })
 		  }

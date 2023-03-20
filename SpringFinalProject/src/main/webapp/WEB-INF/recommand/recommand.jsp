@@ -206,7 +206,7 @@ h1{
 		  }, 
 		 change:function(no){
 			 let _this=this;
-			 axios.get("http://localhost/web/food/recommand_change.do",{
+			 axios.get("../food/recommand_change.do",{
 				 params:{
 					 no:no 
 				 }
@@ -217,7 +217,7 @@ h1{
 		 },
 		 recommandData:function(r){
 			 let _this=this;
-			 axios.get("http://localhost/web/food/recommand_result.do",{
+			 axios.get("../food/recommand_result.do",{
 				 params:{
 					 ss:r
 				 }
@@ -230,7 +230,7 @@ h1{
 			 //alert("fno="+fno)
 			 let _this=this;
 			 this.isShow=show
-			 axios.get("http://localhost/web/food/food_location_detail_vue.do",{
+			 axios.get("../food/food_location_detail_vue.do",{
 				 params:{
 					 fno:fno
 				 }

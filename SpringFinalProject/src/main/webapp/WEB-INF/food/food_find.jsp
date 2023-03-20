@@ -89,7 +89,7 @@
 		  // 사용자 정의
 		  getData:function(){
 			  let _this=this;
-			  axios.get("http://localhost/web/food/food_find_vue.do",{
+			  axios.get("../food/food_find_vue.do",{
 				  params:{
 					  page:this.curpage,
 					  address:this.ss

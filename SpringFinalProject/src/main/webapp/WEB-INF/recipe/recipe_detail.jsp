@@ -102,7 +102,7 @@
 			  //alert(goods);
 			  this.isShow=true;
 			  let _this=this;
-			  axios.get("http://localhost/web/recipe/goods_price_vue.do",{
+			  axios.get("../recipe/goods_price_vue.do",{
 				  params:{
 					  goods_name:goods
 				  }
