@@ -28,7 +28,7 @@ h1{
         <td width=20% class="text-center danger">번호</td>
         <td width=30% class="text-center">${vo.no }</td>
         <td width=20% class="text-center danger">작성일</td>
-        <td width=30% class="text-center">${vo.dbday }</td>
+        <td width=30% class="text-center">${vo.regdate }</td>
       </tr>
       <tr>
         <td width=20% class="text-center danger">이름</td>
@@ -45,9 +45,9 @@ h1{
       </tr>
       <tr>
         <td colspan="4" class="text-right">
-          <a href="update.do?no=${vo.no }" class="btn btn-xs btn-danger">수정</a>
-          <a href="delete.do?no=${vo.no }" class="btn btn-xs btn-info">삭제</a>
-          <a href="list.do" class="btn btn-xs btn-primary">목록</a>
+          <a href="/update?no=${vo.no }" class="btn btn-xs btn-danger">수정</a>
+          <a href="/delete?no=${vo.no }" class="btn btn-xs btn-info">삭제</a>
+          <a href="/list" class="btn btn-xs btn-primary">목록</a>
         </td>
       </tr>
      </table>

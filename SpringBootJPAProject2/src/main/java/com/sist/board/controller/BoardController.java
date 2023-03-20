@@ -39,4 +39,59 @@ public class BoardController {
 	  dao.save(vo);
 	  return "redirect:/list";
   }
+  @GetMapping("/detail")
+  public String board_detail(int no,Model model)
+  {
+	  BoardEntity vo=dao.findByNo(no);
+	  vo.setHit(vo.getHit()+1);
+	  dao.save(vo);
+	  vo=dao.findByNo(no);
+	  model.addAttribute("vo", vo);
+	  return "board/detail";
+  }
+  @GetMapping("/update")
+  public String board_update(int no,Model model)
+  {
+	  BoardEntity vo=dao.findByNo(no);
+	  model.addAttribute("vo", vo);
+	  return "board/update";
+  }
+  @PostMapping("/update_ok")
+  public String board_update_ok(BoardEntity vo,Model model)
+  {
+	  BoardEntity dbvo=dao.findByNo(vo.getNo());
+	  String result="";
+	  if(dbvo.getPwd().equals(vo.getPwd()))
+	  {
+		  result="yes";
+		  dao.save(vo);
+	  }
+	  else
+	  {
+		  result="no";
+	  }
+	  model.addAttribute("no", vo.getNo());
+	  model.addAttribute("result", result);
+	  
+	  return "board/update_ok";
+  }
+  @GetMapping("/delete")
+  public String board_delete(int no,Model model)
+  {
+	  model.addAttribute("no", no);
+	  return "board/delete";
+  }
+  @PostMapping("/delete_ok")
+  public String board_delete_ok(int no,String pwd,Model model)
+  {
+	  BoardEntity vo=dao.findByNo(no);
+	  String result="no";
+	  if(vo.getPwd().equals(pwd))
+	  {
+		  result="yes";
+		  dao.delete(vo);
+	  }
+	  model.addAttribute("result", result);
+	  return "board/delete_ok";
+  }
 }

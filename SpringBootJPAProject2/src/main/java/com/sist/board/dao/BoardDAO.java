@@ -11,6 +11,7 @@ import com.sist.board.entity.BoardEntity;
 
 @Repository
 public interface BoardDAO extends JpaRepository<BoardEntity,Integer>{
+	
     public BoardEntity findByNo(@Param("no") Integer no);// 상세보기 
     // SELECT * FROM board WHERE no=
     // findByName , findByNameLike(String name)   findByNameOrSuject => WHERE name= or subject=
