@@ -37,12 +37,12 @@
       </li>
       <li><a class="drop" href="#">서울여행</a>
         <ul>
-          <li><a href="pages/gallery.html">명소</a></li>
-          <li><a href="pages/gallery.html">자연&관광</a></li>
-          <li><a href="pages/gallery.html">쇼핑</a></li>
+          <li><a href="@{/seoul/location}">명소</a></li>
+          <li><a href="@{/seoul/nature}">자연&관광</a></li>
+          <li><a href="@{/seoul/shop}">쇼핑</a></li>
         </ul>
       </li>
-      <li><a href="#">커뮤니티</a></li>
+      <li><a th:href="@{/board/board_list}">커뮤니티</a></li>
     </ul>
   </nav>
 </div>
