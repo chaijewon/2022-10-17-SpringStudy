@@ -18,10 +18,10 @@ public interface BoardDAO extends JpaRepository<BoardEntity,Integer>{
     // 자동 : save , remove 
     // 검색 : findBy(Column)
     // @Query
-    @Query(value="SELECT no,name,subject,content,pwd,regdate,hit "
+    @Query(value="SELECT no,name,subject,regdate,hit "
     		    +"FROM board ORDER BY no DESC "
     		    +"LIMIT :start,10",nativeQuery=true)
-    public List<BoardEntity> boardListData(@Param("start") int start);
+    public List<BoardInfoMapping> boardListData(@Param("start") int start);
     
     @Query(value="SELECT CEIL(COUNT(*)/10.0) FROM board",nativeQuery=true)
     public int boardTotalPage();

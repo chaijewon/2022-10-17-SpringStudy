@@ -1,6 +1,7 @@
 package com.sist.board.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,9 +20,11 @@ public class BoardEntity {
    private String name,subject,content,pwd;
    private int hit;
    private LocalDateTime regdate;
-   
+   private String dbday;
+  
    @PrePersist
    public void regdate() {
 	   this.regdate=LocalDateTime.now();
+	   this.dbday=this.regdate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
    }
 }

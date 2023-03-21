@@ -22,7 +22,7 @@ public class BoardController {
 		  page="1";
 	  int curpage=Integer.parseInt(page);
 	  int start=(curpage*10)-10;
-	  List<BoardEntity> list=dao.boardListData(start);
+	  List<BoardInfoMapping> list=dao.boardListData(start);
 	  int totalpage=dao.boardTotalPage();
 	  model.addAttribute("list", list);
 	  model.addAttribute("curpage", curpage);
