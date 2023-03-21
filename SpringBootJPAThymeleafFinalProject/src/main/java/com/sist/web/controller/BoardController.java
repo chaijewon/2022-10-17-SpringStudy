@@ -25,12 +25,14 @@ public class BoardController {
  	   int rowSize=20;
  	   int start=(curpage*rowSize)-rowSize;
  	   List<BoardEntity> list=dao.boardListData(start);
- 	   for(BoardEntity vo:list)
- 	   {
- 		   String s=vo.getRegdate();
- 		   String[] ss=s.split(" ");
- 		   vo.setRegdate(ss[0]);
- 	   }
+		
+		  for(BoardEntity vo:list) 
+		  { 
+			  String s=vo.getRegdate(); 
+			  String[] ss=s.split(" "); 
+			  vo.setRegdate(ss[0]); 
+		  }
+		 
  	   int totalpage=dao.boardTotalPage();
  	   model.addAttribute("curpage", curpage);
  	   model.addAttribute("totalpage", totalpage);
